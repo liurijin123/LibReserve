@@ -52,7 +52,7 @@ public class Util {
     public static String getCodeStr(String jsonStr, String decStr) {
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("js");
-        String jsFileName = "D:\\DATA\\IdeaProjects\\LibTool\\src\\main\\java\\code.js";
+        String jsFileName = "D:\\DATA\\IdeaProjects\\LibReserve\\src\\main\\java\\code.js";
         FileReader reader = null;   // 执行指定脚本
         String codeStr = null;
         try {
