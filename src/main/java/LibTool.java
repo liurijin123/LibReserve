@@ -38,8 +38,8 @@ public class LibTool {
         System.out.println(codeStr);
         String bookUrl = "https://wechat.laixuanzuo.com/index.php/reserve/get/libid=" + libId + "&" + codeStr + "=" + x + "," + y + "&yzm=";
         header.put("Referer", Config.Referer);
-        //定时
 
+        //阻塞定时
 //        Util.timing(7,0,0);
 //        String bookHtml = request.sentHttps(bookUrl,header);
 //        System.out.println(bookHtml);
