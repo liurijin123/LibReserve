@@ -26,7 +26,6 @@ public class LibTool {
         header.put("UserAgent", Config.UserAgent);
         Request request = new Request("wechatSESS_ID", cookie, "wechat.laixuanzuo.com");
         String jsText;
-        int count = 0;
         do {
             String indexHtml = request.sentHttps(Config.indexUrl, header);
             //获取加密js文件

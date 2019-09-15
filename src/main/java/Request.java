@@ -12,13 +12,10 @@ import org.apache.http.ssl.SSLContexts;
 import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import javax.net.ssl.SSLContext;
 import java.io.IOException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Map;
 
 public class Request {
@@ -68,16 +65,10 @@ public class Request {
             for(Map.Entry<String, String> entry : header.entrySet()){
                 httpget.addHeader(entry.getKey(),entry.getValue());
             }
-//            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");//设置日期格式
-//            System.out.println(df.format(new Date()));// new Date()为获取当前系统时间
-//            System.out.println("Executing request " + httpget.getRequestLine());
             logger.info("执行请求" + httpget.getRequestLine());
-
             response = httpclient.execute(httpget);
             HttpEntity entity =  response.getEntity();  //获取网页内容
             String result = EntityUtils.toString(entity, "UTF-8");
-
-//            System.out.println(result);
             return result;
         }catch (Exception e){
             e.printStackTrace();

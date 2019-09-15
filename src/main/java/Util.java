@@ -8,7 +8,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -72,7 +71,6 @@ public class Util {
             if (engine instanceof Invocable) {
                 Invocable invoke = (Invocable) engine;    // 调用merge方法，并传入两个参数
                 codeStr = (String) invoke.invokeFunction("getCode", jsonStr, decStr); //调用了js的aa方法
-                //System.out.println(code);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -115,10 +113,8 @@ public class Util {
     public static void noBlockTiming(MyTimerTask timerTask, String setDate) {
         logger.info("设置时间-->" + setDate);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss.SSS");
         try {
             Date date = dateFormat.parse(setDate);
-//            Date date = dateFormat.parse("23:00:00.000");
             Timer timer = new Timer("time");
             timerTask.setTimer(timer);
             timer.schedule(timerTask, date);
