@@ -1,17 +1,24 @@
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class LibTool {
+    private Logger logger = LogManager.getLogger("test");
+
     private String cookie;
     private String libId;
     private String x;
     private String y;
+    private String setDate;
 
-    public LibTool(String cookie, String libId, String x, String y) {
+    public LibTool(String cookie, String libId, String x, String y, String setDate) {
         this.cookie = cookie;
         this.libId = libId;
         this.x = x;
         this.y = y;
+        this.setDate = setDate;
     }
 
     public void start() {
@@ -29,13 +36,13 @@ public class LibTool {
 
         //提取jsonStr和decStr
         String jsonStr = Util.getJsonStr(jsText);
-        System.out.println(jsonStr);
+        logger.info("提取jsonStr" + jsonStr);
         String decStr = Util.getDecStr(jsText);
-        System.out.println(decStr);
+        logger.info("提取decStr" + decStr);
 
         //获取校验码
         String codeStr = Util.getCodeStr(jsonStr, decStr);
-        System.out.println(codeStr);
+        logger.info("获取校验码" + codeStr);
         String bookUrl = "https://wechat.laixuanzuo.com/index.php/reserve/get/libid=" + libId + "&" + codeStr + "=" + x + "," + y + "&yzm=";
         header.put("Referer", Config.Referer);
 
@@ -45,7 +52,7 @@ public class LibTool {
 //        System.out.println(bookHtml);
 
         //非阻塞定时
-        MyTimerTask timerTask = new MyTimerTask(header,bookUrl,request);
-        Util.noBlockTiming(timerTask);
+        MyTimerTask timerTask = new MyTimerTask(header, bookUrl, request);
+        Util.noBlockTiming(timerTask, setDate);
     }
 }

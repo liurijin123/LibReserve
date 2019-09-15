@@ -10,6 +10,8 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.ssl.SSLContexts;
 import org.apache.http.util.EntityUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.net.ssl.SSLContext;
 import java.io.IOException;
@@ -24,6 +26,7 @@ public class Request {
     private SSLContext sslcontext ;
     private SSLConnectionSocketFactory sslsf ;
     private CloseableHttpClient httpclient ;
+    private Logger logger = LogManager.getLogger("test");
 
     public Request(String name, String value, String doMain) {
         try {
@@ -65,9 +68,10 @@ public class Request {
             for(Map.Entry<String, String> entry : header.entrySet()){
                 httpget.addHeader(entry.getKey(),entry.getValue());
             }
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");//设置日期格式
-            System.out.println(df.format(new Date()));// new Date()为获取当前系统时间
-            System.out.println("Executing request " + httpget.getRequestLine());
+//            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");//设置日期格式
+//            System.out.println(df.format(new Date()));// new Date()为获取当前系统时间
+//            System.out.println("Executing request " + httpget.getRequestLine());
+            logger.info("执行请求" + httpget.getRequestLine());
 
             response = httpclient.execute(httpget);
             HttpEntity entity =  response.getEntity();  //获取网页内容

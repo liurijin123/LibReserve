@@ -1,7 +1,15 @@
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
+import java.io.ByteArrayOutputStream;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -12,13 +20,15 @@ import java.util.regex.Pattern;
 
 public class Util {
 
+    private static Logger logger = LogManager.getLogger("test");
+
     public static boolean getTestCode(String jsText) {
         // 创建 Pattern 对象
         Pattern r = Pattern.compile("\\w{1}\\(\\w{10}\\)");
         // 现在创建 matcher 对象
         Matcher m = r.matcher(jsText);
         if (m.find()) {
-            System.out.println(m.group());
+            logger.info("复杂算法" + m.group());
             return true;
         } else {
             return false;
@@ -101,15 +111,38 @@ public class Util {
             }
         } while (hour != nowHour || minu != nowMinu || seco != nowSeco);
     }
-    public static void noBlockTiming(MyTimerTask timerTask){
+
+    public static void noBlockTiming(MyTimerTask timerTask, String setDate) {
+        logger.info("设置时间-->" + setDate);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 //        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss.SSS");
         try {
-            Date date = dateFormat.parse("2019-09-09 07:07:00.000");
+            Date date = dateFormat.parse(setDate);
 //            Date date = dateFormat.parse("23:00:00.000");
-            new Timer("testTimer1").schedule(timerTask, date);
+            Timer timer = new Timer("time");
+            timerTask.setTimer(timer);
+            timer.schedule(timerTask, date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void setBJtime() throws IOException {
+        URL u=new URL("http://api.k780.com/?app=life.time&appkey=45321&sign=e6a971729ffab837ddce922c85c08ea4&format=json");
+        InputStream in=u.openStream();
+        ByteArrayOutputStream out=new ByteArrayOutputStream();
+        try {
+            byte buf[]=new byte[1024];
+            int read = 0;
+            while ((read = in.read(buf)) > 0) {
+                out.write(buf, 0, read);
+            }
+        }  finally {
+            if (in != null) {
+                in.close();
+            }
+        }
+        byte b[]=out.toByteArray( );
+        System.out.println(new String(b,"utf-8"));
     }
 }
