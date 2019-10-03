@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 
 public class Util {
 
-    private static Logger logger = LogManager.getLogger("test");
+    private static Logger logger;
 
     public static boolean getTestCode(String jsText) {
         // 创建 Pattern 对象
@@ -27,7 +27,7 @@ public class Util {
         // 现在创建 matcher 对象
         Matcher m = r.matcher(jsText);
         if (m.find()) {
-            logger.info("复杂算法" + m.group());
+            //logger.info("复杂算法" + m.group());
             return true;
         } else {
             return false;
@@ -110,35 +110,22 @@ public class Util {
         } while (hour != nowHour || minu != nowMinu || seco != nowSeco);
     }
 
-    public static void noBlockTiming(MyTimerTask timerTask, String setDate) {
-        logger.info("设置时间-->" + setDate);
+    public static void noBlockTiming(String name, MyTimerTask timerTask, String setDate) {
+        //logger.info("用户：" + name + "设置时间-->" + setDate);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         try {
             Date date = dateFormat.parse(setDate);
             Timer timer = new Timer("time");
             timerTask.setTimer(timer);
+            timerTask.setName(name);
             timer.schedule(timerTask, date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
 
-    public static void setBJtime() throws IOException {
-        URL u=new URL("http://api.k780.com/?app=life.time&appkey=45321&sign=e6a971729ffab837ddce922c85c08ea4&format=json");
-        InputStream in=u.openStream();
-        ByteArrayOutputStream out=new ByteArrayOutputStream();
-        try {
-            byte buf[]=new byte[1024];
-            int read = 0;
-            while ((read = in.read(buf)) > 0) {
-                out.write(buf, 0, read);
-            }
-        }  finally {
-            if (in != null) {
-                in.close();
-            }
-        }
-        byte b[]=out.toByteArray( );
-        System.out.println(new String(b,"utf-8"));
+    public static Logger getLogger(String name){
+        logger = LogManager.getLogger(name);
+        return logger;
     }
 }

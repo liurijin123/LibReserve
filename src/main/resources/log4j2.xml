@@ -8,6 +8,12 @@
         <File name="log" fileName="log/test.log" append="false">
             <PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </File>
+        <File name="liutong" fileName="log/liutong.log" append="false">
+            <PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+        <File name="goutou" fileName="log/goutou.log" append="false">
+            <PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
         <!-- 这个会打印出所有的信息，每次大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档-->
         <RollingFile name="RollingFile" fileName="logs/app.log"
                      filePattern="log/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
@@ -21,6 +27,14 @@
         <logger name="test" level="trace" additivity="false">
             <appender-ref ref="Console"/>
             <appender-ref ref="log"/>
+        </logger>
+        <logger name="liutong" level="trace" additivity="false">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="liutong"/>
+        </logger>
+        <logger name="goutou" level="trace" additivity="false">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="goutou"/>
         </logger>
         <root level="error">
             <appender-ref ref="Console"/>

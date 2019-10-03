@@ -20,13 +20,16 @@ import java.util.Map;
 
 public class Request {
 
+    private String name;
     private SSLContext sslcontext ;
     private SSLConnectionSocketFactory sslsf ;
     private CloseableHttpClient httpclient ;
     private Logger logger = LogManager.getLogger("test");
 
-    public Request(String name, String value, String doMain) {
+    public Request(String name ,String cookieName, String value, String doMain) {
         try {
+            this.name = name;
+            logger = LogManager.getLogger(name);
             sslcontext = SSLContexts.custom()
                     .loadTrustMaterial(null, new TrustStrategy()
                     {
@@ -42,7 +45,7 @@ public class Request {
                     null,
                     SSLConnectionSocketFactory.getDefaultHostnameVerifier());
             CookieStore cookieStore = new BasicCookieStore();
-            BasicClientCookie cookie = new BasicClientCookie(name, value);
+            BasicClientCookie cookie = new BasicClientCookie(cookieName, value);
             cookie.setDomain(doMain);
             cookie.setPath("/");
             cookieStore.addCookie(cookie);

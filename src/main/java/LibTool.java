@@ -5,15 +5,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LibTool {
-    private Logger logger = LogManager.getLogger("test");
 
+
+    private String name;
     private String cookie;
     private String libId;
     private String x;
     private String y;
     private String setDate;
 
-    public LibTool(String cookie, String libId, String x, String y, String setDate) {
+    public LibTool(String name, String cookie, String libId, String x, String y, String setDate) {
+        this.name = name;
         this.cookie = cookie;
         this.libId = libId;
         this.x = x;
@@ -22,9 +24,11 @@ public class LibTool {
     }
 
     public void start() {
+        Logger logger = LogManager.getLogger(name);
+
         Map<String, String> header = new HashMap<String, String>();
         header.put("UserAgent", Config.UserAgent);
-        Request request = new Request("wechatSESS_ID", cookie, "wechat.laixuanzuo.com");
+        Request request = new Request(name,"wechatSESS_ID", cookie, "wechat.laixuanzuo.com");
         String jsText;
         do {
             String indexHtml = request.sentHttps(Config.indexUrl, header);
@@ -52,6 +56,6 @@ public class LibTool {
 
         //非阻塞定时
         MyTimerTask timerTask = new MyTimerTask(header, bookUrl, request);
-        Util.noBlockTiming(timerTask, setDate);
+        Util.noBlockTiming(name,timerTask, setDate);
     }
 }
