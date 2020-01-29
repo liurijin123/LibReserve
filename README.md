@@ -14,6 +14,7 @@
 ![](http://img.liutong.fun/QQ图片20200129200901.jpg)
 
 ### 二、操作起来
+>可以添加多个座位，增加成功率
 ```
 import fun.liutong.LibTool;
 
