@@ -1,17 +1,7 @@
 ## 使用说明
 
 ### 一、抓包抓取wechatSESS_ID
-**抓包APP下载**
-
-链接：https://pan.baidu.com/s/1AUojh9IgEKMEMKaM8NGPTg 
-
-提取码：4c3g 
-
-**抓取wechatSESS_ID**
-
-![](http://img.liutong.fun/QQ图片20200129200839.jpg)
-![](http://img.liutong.fun/QQ图片20200129200854.jpg)
-![](http://img.liutong.fun/QQ图片20200129200901.jpg)
+如何抓包：https://github.com/liurijin123/LibReserve/blob/master/%E6%8A%93%E5%8C%85%E6%95%99%E7%A8%8B.md
 
 ### 二、操作起来
 >可以添加多个座位，增加成功率
@@ -40,6 +30,7 @@ public class Main {
 }
 
 ```
+联系方式：qq 794517479
 
 目前正开发web版
 
