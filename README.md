@@ -30,13 +30,10 @@ public class Main {
 }
 
 ```
-## 联系方式  qq 794517479
+
 
 ---------------------------------
 
-目前正开发web版
 
-[https://github.com/liurijin123/libweb](https://github.com/liurijin123/libweb)
-
-![](http://img.liutong.fun/QQ图片20200129203418.jpg)
+## 开发了一个桌面版，想用的加qq群 1160811045
 
